@@ -1,5 +1,29 @@
 # ![SVGNest](http://svgnest.com/github/logo2.png)
 
+# 代码解析
+
+convex hull 凸包
+
+## clipper.js
+
+这个的文档在 sourceFroge 上，参见
+
+https://sourceforge.net/p/jsclipper/wiki/Home%206/
+
+https://www.cnblogs.com/zhigu/p/11928492.html
+
+## parallel.js
+
+https://github.com/parallel-js/parallel.js/
+
+https://www.sitepoint.com/parallel-javascript-with-paralleljs/
+
+## minkowski
+
+https://eprints.soton.ac.uk/36850/1/CORMSIS-05-05.pdf
+
+http://spaderthomas.com/minkowski/#what-is-a-minkowski-difference
+
 **SVGNest**: A browser-based vector nesting tool.
 
 **Demo:** http://svgnest.com
@@ -7,9 +31,10 @@
 (requires SVG and webworker support). Mobile warning: running the demo is CPU intensive.
 
 references (PDF):
-- [López-Camacho *et al.* 2013](http://www.cs.stir.ac.uk/~goc/papers/EffectiveHueristic2DAOR2013.pdf)
+
+- [López-Camacho _et al._ 2013](http://www.cs.stir.ac.uk/~goc/papers/EffectiveHueristic2DAOR2013.pdf)
 - [Kendall 2000](http://www.graham-kendall.com/papers/k2001.pdf)
-- [E.K. Burke *et al.* 2006](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.440.379&rep=rep1&type=pdf)
+- [E.K. Burke _et al._ 2006](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.440.379&rep=rep1&type=pdf)
 
 ## What is "nesting"?
 
@@ -82,7 +107,7 @@ In our GA the insertion order and the rotation of the parts form the gene. The f
 
 1. Minimize the number of unplaceable parts (parts that cannot fit any bin due to its rotation)
 2. Minimize the number of bins used
-3. Minimize the *width* of all placed parts
+3. Minimize the _width_ of all placed parts
 
 The third one is rather arbitrary, as we can also optimize for rectangular bounds or a minimal concave hull. In real-world use the material to be cut tends to be rectangular, and those options tend to result in long slivers of un-used material.
 
@@ -98,7 +123,7 @@ Performs similarly to commercial software, after both have run for about 5 minut
 
 - **Space between parts:** Minimum space between parts (eg. for laser kerf, CNC offset etc.)
 - **Curve tolerance:** The maximum error allowed for linear approximations of Bezier paths and arcs, in SVG units or "pixels". Decrease this value if curved parts appear to slightly overlap.
-- **Part rotations:** The *possible* number of rotations to evaluate for each part. eg. 4 for only the cardinal directions. Larger values may improve results, but will be slower to converge.
+- **Part rotations:** The _possible_ number of rotations to evaluate for each part. eg. 4 for only the cardinal directions. Larger values may improve results, but will be slower to converge.
 - **GA population:** The population size for the Genetic Algorithm
 - **GA mutation rate:** The probability of mutation for each gene or part placement. Values from 1-50
 - **Part in part:** When enabled, places parts in the holes of other parts. This is off by default as it can be resource intensive
