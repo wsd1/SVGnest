@@ -117,7 +117,6 @@ function PlacementWorker(binPolygon, paths, ids, rotations, config, nfpCache) {
 						break;
 					}
 				}
-
 				// part unplaceable, skip
 				if (error) {
 					continue;
@@ -160,6 +159,7 @@ function PlacementWorker(binPolygon, paths, ids, rotations, config, nfpCache) {
 
 
 				for (j = 0; j < placed.length; j++) {
+					//找到每一个已经摆好的图形的 nfp
 					key = JSON.stringify({ A: placed[j].id, B: path.id, inside: false, Arotation: placed[j].rotation, Brotation: path.rotation });
 					nfp = self.nfpCache[key];
 
@@ -169,11 +169,13 @@ function PlacementWorker(binPolygon, paths, ids, rotations, config, nfpCache) {
 
 					for (k = 0; k < nfp.length; k++) {
 						var clone = toClipperCoordinates(nfp[k]);
+						//将已经摆放好的图形的nfp移动到该去的位置
 						for (m = 0; m < clone.length; m++) {
 							clone[m].X += placements[j].x;
 							clone[m].Y += placements[j].y;
 						}
 
+						//处理好 移动过位置的 nfp 并将其加入 clipper（后面要做并集合操作）
 						ClipperLib.JS.ScaleUpPath(clone, self.config.clipperScale);
 						clone = ClipperLib.Clipper.CleanPolygon(clone, 0.0001 * self.config.clipperScale);
 						var area = Math.abs(ClipperLib.Clipper.Area(clone));
@@ -182,7 +184,7 @@ function PlacementWorker(binPolygon, paths, ids, rotations, config, nfpCache) {
 						}
 					}
 				}
-
+				//将所有 已经摆放好的、移动过位置的nfp做并集操作——集合后形成的线条也是 当前形状可以放置的位置
 				if (!clipper.Execute(ClipperLib.ClipType.ctUnion, combinedNfp, ClipperLib.PolyFillType.pftNonZero, ClipperLib.PolyFillType.pftNonZero)) {
 					continue;
 				}

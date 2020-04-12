@@ -2,6 +2,8 @@
 
 # 代码解析
 
+主要见 svgNest.js 文件。内部有很多注释
+
 convex hull 凸包
 
 ## clipper.js
