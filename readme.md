@@ -4,7 +4,15 @@
 
 主要见 svgNest.js 文件。内部有很多注释
 
-convex hull 凸包
+## convex hull 凸包
+
+凸包用于复杂形状的近似运算，js 的实现参见：
+
+https://www.nayuki.io/page/convex-hull-algorithm
+
+## 凸包内切长方形 inscribe rectangle 算法
+
+http://cgm.cs.mcgill.ca/~athens/cs507/Projects/2003/DanielSud/
 
 ## clipper.js
 
